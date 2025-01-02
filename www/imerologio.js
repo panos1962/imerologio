@@ -16,6 +16,9 @@ Imerologio.setup = function() {
 	Imerologio.seletosDOM = $('#seletos');
 	Imerologio.selminasDOM = $('#selminas');
 	Imerologio.imerologioDOM = $('#imerologio');
+	Imerologio.pinakasDOM = $('#pinakas');
+	Imerologio.ektiposiDOM = $('#ektiposi');
+	Imerologio.printDOM = $('#print');
 
 	Imerologio.etosDOM = Imerologio.seletosDOM.find('.epilogi').first();
 	Imerologio.minasDOM = undefined;
@@ -38,13 +41,16 @@ Imerologio.printer = function() {
 	on('beforeprint', function() {
 		Imerologio.seletosDOM.css('display', 'none');
 		Imerologio.selminasDOM.css('display', 'none');
-		Imerologio.printDOM.css('display', 'none');
+		Imerologio.ektiposiDOM.css('display', 'none');
 	}).
 	on('afterprint', function() {
 		Imerologio.seletosDOM.css('display', '');
 		Imerologio.selminasDOM.css('display', '');
-		Imerologio.printDOM.css('display', '');
+		Imerologio.ektiposiDOM.css('display', '');
 	});
+
+	Imerologio.printDOM.
+	on('click', () => window.print());
 
 	return Imerologio;
 };
@@ -138,12 +144,11 @@ Imerologio.display = function() {
 	if (dow)
 	date = new Date(date.getTime() - (dow * 24 * 60 * 60 * 1000));
 
-	Imerologio.imerologioDOM.empty();
-	let pinakasDOM = $('<table>').appendTo(Imerologio.imerologioDOM);
+	Imerologio.pinakasDOM.empty();
 
 	// Στην πρώτη γραμμή του πίνακα τυπώνουμε τον μήνα και το έτος.
 
-	pinakasDOM.
+	Imerologio.pinakasDOM.
 	append($('<tr>').
 	append($('<td id="epikefalida" colspan="7">').
 	text(Imerologio.minasDOM.text() + ' ' + etos)));
@@ -151,15 +156,15 @@ Imerologio.display = function() {
 	// Στην επόμενη γραμμή εκτυπώνουμε τα ονόματα των ημερών ξεκινώντας
 	// από την Δευτέρα.
 
-	let gramiDOM = $('<tr>').appendTo(pinakasDOM);
+	let gramiDOM = $('<tr>').appendTo(Imerologio.pinakasDOM);
 
 	for (dow = 0; dow < 7; dow++)
 	$('<td class="dow skiasi">').text(Imerologio.dow[dow]).appendTo(gramiDOM);
 
 	// Ακολουθούν οι εβδομάδες του ζητούμενου μήνα.
 
-	while (true) {
-		gramiDOM = $('<tr>').appendTo(pinakasDOM);
+	do {
+		gramiDOM = $('<tr>').appendTo(Imerologio.pinakasDOM);
 
 		for (dow = 0; dow < 7; dow++) {
 			let m = date.getMonth();
@@ -183,25 +188,9 @@ Imerologio.display = function() {
 
 			date = new Date(date.getTime() + (24 * 60 * 60 * 1000));
 		}
+	} while (date.getMonth() == minas);
 
-		// Αν η ημερομηνία που έχει σειρά να εκτυπωθεί στην αμέσως
-		// επόμενη εβδομάδα είναι εκτός του ζητούμενου μήνα, τότε
-		// έχουμε τελειώσει.
-
-		if (date.getMonth() != minas)
-		break;
-	}
-
-	// Ακριβώς κάτω από το ημερολόγιο εμφανίζουμε πλήκτρο εκτύπωσης.
-
-	Imerologio.printDOM = $('<div id="ektiposi">').
-	append($('<button type="button">').
-	text('Print!').
-	on('click', function() {
-		window.print();
-	})).
-	appendTo(Imerologio.imerologioDOM);
-
+	Imerologio.printDOM.css('display', 'inline-block');
 	return Imerologio;
 };
 

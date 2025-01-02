@@ -24,7 +24,6 @@ seletos()::
 selminas()::
 imerologio();
 ?>
-
 </body>
 
 </html>
@@ -120,7 +119,22 @@ Class Epilogi {
 	}
 
 	public static function imerologio() {
-		?><div id="imerologio"><div><?php
+		?>
+		<div id="imerologio">
+			<table id="pinakas"></table>
+			<div id="ektiposi">
+				<div id="info">
+				Η εκτύπωση είναι προσαρμοσμένη σε μέγεθος
+				χαρτιού A4 με προσανατολισμό portrait.
+				Μην αμελήσετε να ενεργοποιήσετε τα «background
+				graphics» από τις επιλογές εκτύπωσης.
+				</div>
+				<button id="print" type="button">
+				Print!
+				</button>
+			</div>
+		</div>
+		<?php
 
 		return __CLASS__;
 	}
