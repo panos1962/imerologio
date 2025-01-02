@@ -17,7 +17,7 @@ Imerologio.setup = function() {
 	Imerologio.selminasDOM = $('#selminas');
 	Imerologio.imerologioDOM = $('#imerologio');
 
-	Imerologio.etosDOM = undefined;
+	Imerologio.etosDOM = Imerologio.seletosDOM.find('.epilogi').first();
 	Imerologio.minasDOM = undefined;
 
 	$(document.body).

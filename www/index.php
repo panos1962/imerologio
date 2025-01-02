@@ -90,7 +90,12 @@ Class Epilogi {
 		$etoseos = $etosapo + 12;
 
 		for ($etos = $etosapo; $etos < $etoseos; $etos++) {
-			?><div class="item etos"><?php
+			$klasi = "item etos";
+
+			if ($etos == self::$etos)
+			$klasi .= " epilogi";
+
+			?><div class="<?php print $klasi; ?>"><?php
 				print $etos;
 			?></div><?php
 		}
