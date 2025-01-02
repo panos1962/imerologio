@@ -20,6 +20,7 @@ define("ETOS_MAX", 9993);
 <?php
 Epilogi::
 init()::
+copyright()::
 seletos()::
 selminas()::
 imerologio();
@@ -79,6 +80,17 @@ Class Epilogi {
 		}
 
 		self::$etos = $etos;
+		return __CLASS__;
+	}
+
+	public static function copyright() {
+		?>
+		<div id="copyright">
+			Copyright &copy; 2025- by Panos Papadopoulos.
+			All rights reserverd.
+		</div>
+		<?php
+
 		return __CLASS__;
 	}
 

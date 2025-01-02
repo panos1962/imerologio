@@ -13,6 +13,7 @@ Imerologio.init = function() {
 };
 
 Imerologio.setup = function() {
+	Imerologio.copyrightDOM = $('#copyright');
 	Imerologio.seletosDOM = $('#seletos');
 	Imerologio.selminasDOM = $('#selminas');
 	Imerologio.imerologioDOM = $('#imerologio');
@@ -39,11 +40,13 @@ Imerologio.setup = function() {
 Imerologio.printer = function() {
 	$(window).
 	on('beforeprint', function() {
+		Imerologio.copyrightDOM.css('display', 'none');
 		Imerologio.seletosDOM.css('display', 'none');
 		Imerologio.selminasDOM.css('display', 'none');
 		Imerologio.ektiposiDOM.css('display', 'none');
 	}).
 	on('afterprint', function() {
+		Imerologio.copyrightDOM.css('display', '');
 		Imerologio.seletosDOM.css('display', '');
 		Imerologio.selminasDOM.css('display', '');
 		Imerologio.ektiposiDOM.css('display', '');

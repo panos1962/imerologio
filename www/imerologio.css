@@ -1,8 +1,17 @@
 body {
+	position: relative;
 	font-family: "Roboto Condensed", sans-serif;
 	-webkit-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
+}
+
+#copyright {
+	position: absolute;
+	top: 4px;
+	right: 4px;
+	font-style: italic;
+	color: midnightblue;
 }
 
 #seletos {
@@ -33,7 +42,7 @@ body {
 }
 
 .epilogi {
-	background-color: cadetblue !important;
+	background-color: #d3ce85 !important;
 }
 
 .candy {
