@@ -1,0 +1,46 @@
+body {
+	font-family: "Roboto Condensed", sans-serif;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+#seletos {
+	display: inline-block;
+}
+
+#selminas {
+	display: inline-block;
+}
+
+#imerologio {
+	display: inline-block;
+	vertical-align: top;
+}
+
+.item {
+	margin: 1px;
+	padding: 2px 8px;
+	font-size: 40px;
+	font-weight: 600;
+	background-color: beige;
+	border-radius: 4px;
+}
+
+.etos {
+	font-weight: 900;
+	cursor: pointer;
+}
+
+.minas {
+	text-align: center;
+	cursor: pointer;
+}
+
+.epilogi {
+	background-color: cadetblue !important;
+}
+
+.candy {
+	background-color: khaki;
+}
