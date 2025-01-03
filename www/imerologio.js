@@ -19,6 +19,7 @@ Imerologio.setup = function() {
 	Imerologio.imerologioDOM = $('#imerologio');
 	Imerologio.pinakasDOM = $('#pinakas');
 	Imerologio.ektiposiDOM = $('#ektiposi');
+	Imerologio.tonosDOM = $('input[name=tonos]');
 	Imerologio.printDOM = $('#print');
 
 	Imerologio.etosDOM = Imerologio.seletosDOM.find('.epilogi').first();
@@ -33,6 +34,17 @@ Imerologio.setup = function() {
 	}).
 	on('click', '.etos', Imerologio.etosEpilogi).
 	on('click', '.minas', Imerologio.minasEpilogi);
+
+	Imerologio.tonosDOM.on('change', function() {
+		switch ($('input[name=tonos]:checked').val()) {
+		case 'light':
+			$('.mera').css('font-weight', 'normal');
+			break;
+		default:
+			$('.mera').css('font-weight', 'bold');
+			break;
+		}
+	});
 
 	return Imerologio;
 };

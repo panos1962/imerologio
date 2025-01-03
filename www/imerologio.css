@@ -54,9 +54,9 @@ body {
 
 #imerologio {
 	margin: 20px;
-	font-family: "Roboto", sans-serif;
 	display: inline-block;
 	vertical-align: top;
+	letter-spacing: 1px;
 }
 
 #pinakas {
@@ -93,8 +93,9 @@ body {
 	height: 70px;
 
 	font-family: "Rancho", serif;
-	font-weight: 600;
+	font-weight: bold;
 	font-style: normal;
+
 	font-size: 42px;
 
 }
@@ -119,9 +120,14 @@ body {
 	text-align: center;
 }
 
+#panel {
+	padding: 10px;
+	font-size: 24px;
+}
+
 #print {
 	display: none;
-	margin: 10px;
-	font-size: 26px;
+	margin-left: 20px;
+	font-size: 24px;
 	cursor: pointer;
 }

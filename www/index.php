@@ -142,9 +142,14 @@ Class Epilogi {
 				Μην αμελήσετε να ενεργοποιήσετε τα «background
 				graphics» από τις επιλογές εκτύπωσης.
 				</div>
-				<button id="print" type="button">
-				Print!
-				</button>
+				<div id="panel">
+				<input type="radio" id="light" value="light" name="tonos">
+				<label for="light">Light</label>
+				<input type="radio" id="bold" value="bold" name="tonos" checked>
+				<label for="bold">Bold</label>
+
+				<input type="button" id="print" value="Print!">
+				</div>
 			</div>
 		</div>
 		<?php
