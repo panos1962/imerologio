@@ -220,15 +220,17 @@ Imerologio.display = function() {
 			if (m != minas)
 			klasi += ' ektos';
 
+			let dom = $('<div class="' + klasi + '">').
+			text(date.getDate());
+
+			klasi = 'keli';
+
 			// Τα Σαββατοκύριακα εμφανίζονται σκιασμένα.
 
 			if (dow > 4)
 			klasi += ' skiasi';
 
-			let dom = $('<div class="' + klasi + '">').
-			text(date.getDate());
-
-			$('<td>').append(dom).
+			$('<td class="' + klasi + '">').append(dom).
 			appendTo(gramiDOM);
 
 			if (Imerologio.date2ymd(date) === simera)

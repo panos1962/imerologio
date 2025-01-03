@@ -89,10 +89,14 @@ body {
 	border-width: 2px 2px 3px 2px;
 }
 
-.mera {
-	position: relative;
+.keli {
 	width: 90px;
 	height: 70px;
+
+}
+
+.mera {
+	position: relative;
 	font-family: "Rancho", serif;
 	font-weight: bold;
 	font-style: normal;
