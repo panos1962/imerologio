@@ -24,12 +24,13 @@ body {
 }
 
 .item {
-	margin: 4px;
+	margin: 6px 4px;
 	padding: 2px 8px;
 	font-size: 40px;
 	font-weight: 600;
 	background-color: beige;
-	border-radius: 4px;
+	border-radius: 6px;
+	box-shadow: 1px 1px 2px #888
 }
 
 .etos {
@@ -48,6 +49,7 @@ body {
 
 .candy {
 	background-color: khaki;
+	box-shadow: 2px 2px 2px #888
 }
 
 #imerologio {
@@ -57,14 +59,15 @@ body {
 	vertical-align: top;
 }
 
-table {
+#pinakas {
 	border-style: solid;
 	border-color: black;
 	border-width: 4px;
 	border-collapse: collapse;
+	box-shadow: 4px 3px 12px #a9a5a5;
 }
 
-td {
+#pinakas td {
 	text-align: center;
 	border-style: solid;
 	border-color: black;

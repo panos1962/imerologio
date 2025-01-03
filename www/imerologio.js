@@ -45,6 +45,7 @@ Imerologio.printer = function() {
 		Imerologio.selminasDOM.css('display', 'none');
 		Imerologio.ektiposiDOM.css('display', 'none');
 		Imerologio.imerologioDOM.css('margin', '60px 0 0 20px');
+		Imerologio.pinakasDOM.css('box-shadow', 'none');
 	}).
 	on('afterprint', function() {
 		Imerologio.copyrightDOM.css('display', '');
@@ -52,6 +53,7 @@ Imerologio.printer = function() {
 		Imerologio.selminasDOM.css('display', '');
 		Imerologio.ektiposiDOM.css('display', '');
 		Imerologio.imerologioDOM.css('margin', '');
+		Imerologio.pinakasDOM.css('box-shadow', '');
 	});
 
 	Imerologio.printDOM.
