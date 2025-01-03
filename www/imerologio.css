@@ -1,5 +1,6 @@
 body {
 	position: relative;
+	background-color: darkseagreen;
 	font-family: "Roboto Condensed", sans-serif;
 	-webkit-user-select: none;
 	-ms-user-select: none;
@@ -60,11 +61,11 @@ body {
 }
 
 #pinakas {
+	background-color: #FFF;
 	border-style: solid;
 	border-color: black;
 	border-width: 4px;
 	border-collapse: collapse;
-	box-shadow: 4px 3px 12px #a9a5a5;
 }
 
 #pinakas td {

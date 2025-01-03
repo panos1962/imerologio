@@ -19,7 +19,11 @@ define("MINAS_MAX", 12);
 <link rel="icon" type="image/png" href="favicon.png">
 </head>
 
-<body>
+<body<?php
+	if (array_key_exists("color", $_GET))
+	print ' style="background-color: ' . Epilogi::random_color() . '"';
+?>>
+
 <?php
 Epilogi::
 init()::
@@ -63,15 +67,68 @@ Class Epilogi {
 		return __CLASS__;
 	}
 
+	public static function random_color() {
+		$colors = [
+			"aliceblue",
+			"antiquewhite",
+			"aquamarine",
+			"bisque",
+			"burlywood",
+			"cadetblue",
+			"chocolate",
+			"coral",
+			"darkkhaki",
+			"darkorange",
+			"darksalmon",
+			"darkseagreen",
+			"darkslategray",
+			"forestgreen",
+			"ghostwhite",
+			"gold",
+			"goldenrod",
+			"lemonchiffon",
+			"lightblue",
+			"lightcoral",
+			"lightsalmon",
+			"lightseagreen",
+			"lightsteelblue",
+			"linen",
+			"mediumaquamarine",
+			"mediumseagreen",
+			"moccasin",
+			"peachpuff",
+			"peru",
+			"sandybrown",
+			"seagreen",
+			"seashell",
+			"sienna",
+			"silver",
+			"skyblue",
+			"slategray",
+			"snow",
+			"steelblue",
+			"tan",
+			"teal",
+			"thistle",
+			"tomato",
+			"turquoise",
+			"wheat",
+			"whitesmoke",
+			"yellowgreen"
+		];
+
+		return $colors[rand(1, count($colors)) - 1];
+	}
+
 	private static function init_etos() {
 		self::$etos = intval(date("Y"));
 		self::$minas = intval(date("m"));
 
-		if (!array_key_exists("etos", $_REQUEST))
+		if (!array_key_exists("etos", $_GET))
 		return __CLASS__;
 
 		self::$minas = NULL;
-		$etos = $_REQUEST["etos"];
+		$etos = $_GET["etos"];
 
 		if (!is_numeric($etos))
 		return __CLASS__;
@@ -94,11 +151,11 @@ Class Epilogi {
 	}
 
 	private static function init_minas() {
-		if (!array_key_exists("minas", $_REQUEST))
+		if (!array_key_exists("minas", $_GET))
 		return __CLASS__;
 
 		self::$minas = NULL;
-		$minas = $_REQUEST["minas"];
+		$minas = $_GET["minas"];
 
 		if (!is_numeric($minas))
 		return __CLASS__;

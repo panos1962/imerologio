@@ -12,6 +12,7 @@ Imerologio.init = function() {
 };
 
 Imerologio.setup = function() {
+	Imerologio.bodyDOM = $(document.body);
 	Imerologio.copyrightDOM = $('#copyright');
 	Imerologio.seletosDOM = $('#seletos');
 	Imerologio.selminasDOM = $('#selminas');
@@ -56,8 +57,12 @@ Imerologio.setup = function() {
 };
 
 Imerologio.printer = function() {
+	let bodyColor;
+
 	$(window).
 	on('beforeprint', function() {
+		bodyColor = Imerologio.bodyDOM.css('background-color');
+		Imerologio.bodyDOM.css('background-color', '#FFF');
 		Imerologio.copyrightDOM.css('display', 'none');
 		Imerologio.seletosDOM.css('display', 'none');
 		Imerologio.selminasDOM.css('display', 'none');
@@ -66,6 +71,7 @@ Imerologio.printer = function() {
 		Imerologio.pinakasDOM.css('box-shadow', 'none');
 	}).
 	on('afterprint', function() {
+		Imerologio.bodyDOM.css('background-color', bodyColor);
 		Imerologio.copyrightDOM.css('display', '');
 		Imerologio.seletosDOM.css('display', '');
 		Imerologio.selminasDOM.css('display', '');
