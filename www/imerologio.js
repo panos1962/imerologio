@@ -44,12 +44,14 @@ Imerologio.printer = function() {
 		Imerologio.seletosDOM.css('display', 'none');
 		Imerologio.selminasDOM.css('display', 'none');
 		Imerologio.ektiposiDOM.css('display', 'none');
+		Imerologio.imerologioDOM.css('margin', '60px 0 0 20px');
 	}).
 	on('afterprint', function() {
 		Imerologio.copyrightDOM.css('display', '');
 		Imerologio.seletosDOM.css('display', '');
 		Imerologio.selminasDOM.css('display', '');
 		Imerologio.ektiposiDOM.css('display', '');
+		Imerologio.imerologioDOM.css('margin', '');
 	});
 
 	Imerologio.printDOM.

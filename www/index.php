@@ -8,8 +8,7 @@ define("ETOS_MAX", 9993);
 <head>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Anton+SC&family=Paytone+One&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Rancho&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="imerologio.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="imerologio.js"></script>
@@ -88,6 +87,7 @@ Class Epilogi {
 		?>
 		<div id="copyright">
 			Copyright &copy; 2025- by Panos Papadopoulos.
+			<br>
 			All rights reserverd.
 		</div>
 		<?php
