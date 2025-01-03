@@ -69,11 +69,10 @@ Imerologio.printer = function() {
 		Imerologio.ektiposiDOM.css('display', 'none');
 		Imerologio.imerologioDOM.css('margin', '60px 0 0 20px');
 		Imerologio.pinakasDOM.css('box-shadow', 'none');
+		$('.mera').css('position', 'static');
 
-		if (Imerologio.simeraDOM) {
-			$('.mera').css('position', 'static');
-			Imerologio.simeraDOM.css('display', 'none');
-		}
+		if (Imerologio.simeraDOM)
+		Imerologio.simeraDOM.css('display', 'none');
 	}).
 	on('afterprint', function() {
 		Imerologio.bodyDOM.css('background-color', bodyColor);
@@ -83,11 +82,10 @@ Imerologio.printer = function() {
 		Imerologio.ektiposiDOM.css('display', 'block');
 		Imerologio.imerologioDOM.css('margin', '');
 		Imerologio.pinakasDOM.css('box-shadow', '');
+		$('.mera').css('position', 'relative');
 
-		if (Imerologio.simeraDOM) {
-			$('.mera').css('position', 'relative');
-			Imerologio.simeraDOM.css('display', '');
-		}
+		if (Imerologio.simeraDOM)
+		Imerologio.simeraDOM.css('display', '');
 	});
 
 	Imerologio.printDOM.
