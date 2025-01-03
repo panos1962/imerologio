@@ -6,7 +6,6 @@ Imerologio.init = function() {
 	Imerologio.
 	setup().
 	printer().
-	simera().
 	display();
 
 	return Imerologio;
@@ -19,11 +18,12 @@ Imerologio.setup = function() {
 	Imerologio.imerologioDOM = $('#imerologio');
 	Imerologio.pinakasDOM = $('#pinakas');
 	Imerologio.ektiposiDOM = $('#ektiposi');
+	Imerologio.panelDOM = $('#panel');
 	Imerologio.tonosDOM = $('input[name=tonos]');
 	Imerologio.printDOM = $('#print');
 
-	Imerologio.etosDOM = Imerologio.seletosDOM.find('.epilogi').first();
-	Imerologio.minasDOM = undefined;
+	Imerologio.etosDOM = Imerologio.seletosDOM.children('.epilogi').first();
+	Imerologio.minasDOM = Imerologio.selminasDOM.children('.epilogi').first();
 
 	$(document.body).
 	on('mouseenter', '.item', function() {
@@ -97,6 +97,9 @@ Imerologio.minasEpilogi = function() {
 };
 
 Imerologio.simera = function() {
+	if (Imerologio.etosDOM.length)
+	return Imerologio;
+
 	let simera = new Date();
 	let etos = simera.getFullYear();
 	let minas = simera.getMonth();
@@ -134,10 +137,10 @@ Imerologio.dow = [
 ];
 
 Imerologio.display = function() {
-	if (!Imerologio.etosDOM)
+	if (!Imerologio.etosDOM.length)
 	return Imerologio;
 
-	if (!Imerologio.minasDOM)
+	if (!Imerologio.minasDOM.length)
 	return Imerologio;
 
 	let etos = Imerologio.etosDOM.text();
@@ -209,7 +212,7 @@ Imerologio.display = function() {
 		}
 	} while (date.getMonth() == minas);
 
-	Imerologio.printDOM.css('display', 'inline-block');
+	Imerologio.ektiposiDOM.css('display', 'inline-block');
 	return Imerologio;
 };
 

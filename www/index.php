@@ -1,6 +1,9 @@
 <?php
 define("ETOS_MIN", 1805);
 define("ETOS_MAX", 9993);
+
+define("MINAS_MIN", 1);
+define("MINAS_MAX", 12);
 ?>
 
 <!DOCTYPE html>
@@ -34,10 +37,15 @@ imerologio();
 Class Epilogi {
 	public static $etos;
 	public static $minas;
+	public static $minas_name;
 
 	public static function init() {
-		self::init_etos();
-		self::$minas = [
+		self::
+		init_etos()::
+		init_minas()::
+		post_init();
+
+		self::$minas_name = [
 			"ΙΑΝΟΥΑΡΙΟΣ",
 			"ΦΕΒΡΟΥΑΡΙΟΣ",
 			"ΜΑΡΤΙΟΣ",
@@ -56,11 +64,13 @@ Class Epilogi {
 	}
 
 	private static function init_etos() {
-		self::$etos = date("Y");
+		self::$etos = intval(date("Y"));
+		self::$minas = intval(date("m"));
 
 		if (!array_key_exists("etos", $_REQUEST))
 		return __CLASS__;
 
+		self::$minas = NULL;
 		$etos = $_REQUEST["etos"];
 
 		if (!is_numeric($etos))
@@ -80,6 +90,36 @@ Class Epilogi {
 		}
 
 		self::$etos = $etos;
+		return __CLASS__;
+	}
+
+	private static function init_minas() {
+		if (!array_key_exists("minas", $_REQUEST))
+		return __CLASS__;
+
+		self::$minas = NULL;
+		$minas = $_REQUEST["minas"];
+
+		if (!is_numeric($minas))
+		return __CLASS__;
+
+		if ($minas < 0)
+		return __CLASS__;
+
+		if ($minas < MINAS_MIN)
+		return __CLASS__;
+
+		if ($minas > MINAS_MAX)
+		return __CLASS__;
+
+		self::$minas = intval($minas);
+		return __CLASS__;
+	}
+
+	private static function post_init() {
+		if (isset(self::$minas))
+		self::$minas--;
+
 		return __CLASS__;
 	}
 
@@ -121,8 +161,14 @@ Class Epilogi {
 		?><div id="selminas"><?php
 
 		for ($minas = 0; $minas < 12; $minas++) {
-			?><div class="item minas" minas="<?php print $minas; ?>"><?php
-				print self::$minas[$minas];
+			$klasi = "item minas";
+
+			if ($minas === self::$minas)
+			$klasi .= " epilogi";
+
+			?><div class="<?php print $klasi; ?>"
+				minas="<?php print $minas; ?>"><?php
+				print self::$minas_name[$minas];
 			?></div><?php
 		}
 

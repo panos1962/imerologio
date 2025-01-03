@@ -116,7 +116,7 @@ body {
 }
 
 #ektiposi {
-	display: block;
+	display: none;
 	text-align: center;
 }
 
@@ -126,8 +126,10 @@ body {
 }
 
 #print {
-	display: none;
 	margin-left: 20px;
-	font-size: 24px;
+	font-size: 22px;
+}
+
+#panel input,label {
 	cursor: pointer;
 }
