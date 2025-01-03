@@ -69,7 +69,6 @@ Imerologio.printer = function() {
 		Imerologio.ektiposiDOM.css('display', 'none');
 		Imerologio.imerologioDOM.css('margin', '60px 0 0 20px');
 		Imerologio.pinakasDOM.css('box-shadow', 'none');
-		$('.mera').css('position', 'static');
 
 		if (Imerologio.simeraDOM)
 		Imerologio.simeraDOM.css('display', 'none');
@@ -82,7 +81,6 @@ Imerologio.printer = function() {
 		Imerologio.ektiposiDOM.css('display', 'block');
 		Imerologio.imerologioDOM.css('margin', '');
 		Imerologio.pinakasDOM.css('box-shadow', '');
-		$('.mera').css('position', 'relative');
 
 		if (Imerologio.simeraDOM)
 		Imerologio.simeraDOM.css('display', '');
@@ -227,8 +225,10 @@ Imerologio.display = function() {
 			if (dow > 4)
 			klasi += ' skiasi';
 
-			let dom = $('<td class="' + klasi + '">').
-			text(date.getDate()).
+			let dom = $('<div class="' + klasi + '">').
+			text(date.getDate());
+
+			$('<td>').append(dom).
 			appendTo(gramiDOM);
 
 			if (Imerologio.date2ymd(date) === simera)
