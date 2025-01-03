@@ -20,8 +20,8 @@ define("MINAS_MAX", 12);
 </head>
 
 <body<?php
-	if (array_key_exists("color", $_GET))
-	print ' style="background-color: ' . Epilogi::random_color() . '"';
+if (array_key_exists("color", $_GET))
+print ' style="background-color: ' . Epilogi::random_color() . '"';
 ?>>
 
 <?php
@@ -65,59 +65,6 @@ Class Epilogi {
 		];
 
 		return __CLASS__;
-	}
-
-	public static function random_color() {
-		$colors = [
-			"aliceblue",
-			"antiquewhite",
-			"aquamarine",
-			"bisque",
-			"burlywood",
-			"cadetblue",
-			"chocolate",
-			"coral",
-			"darkkhaki",
-			"darkorange",
-			"darksalmon",
-			"darkseagreen",
-			"darkslategray",
-			"forestgreen",
-			"ghostwhite",
-			"gold",
-			"goldenrod",
-			"lemonchiffon",
-			"lightblue",
-			"lightcoral",
-			"lightsalmon",
-			"lightseagreen",
-			"lightsteelblue",
-			"linen",
-			"mediumaquamarine",
-			"mediumseagreen",
-			"moccasin",
-			"peachpuff",
-			"peru",
-			"sandybrown",
-			"seagreen",
-			"seashell",
-			"sienna",
-			"silver",
-			"skyblue",
-			"slategray",
-			"snow",
-			"steelblue",
-			"tan",
-			"teal",
-			"thistle",
-			"tomato",
-			"turquoise",
-			"wheat",
-			"whitesmoke",
-			"yellowgreen"
-		];
-
-		return $colors[rand(1, count($colors)) - 1];
 	}
 
 	private static function init_etos() {
@@ -258,6 +205,59 @@ Class Epilogi {
 		<?php
 
 		return __CLASS__;
+	}
+
+	public static function random_color() {
+		$colors = [
+			"aliceblue",
+			"antiquewhite",
+			"aquamarine",
+			"bisque",
+			"burlywood",
+			"cadetblue",
+			"chocolate",
+			"coral",
+			"darkkhaki",
+			"darkorange",
+			"darksalmon",
+			"darkseagreen",
+			"darkslategray",
+			"forestgreen",
+			"ghostwhite",
+			"gold",
+			"goldenrod",
+			"lemonchiffon",
+			"lightblue",
+			"lightcoral",
+			"lightsalmon",
+			"lightseagreen",
+			"lightsteelblue",
+			"linen",
+			"mediumaquamarine",
+			"mediumseagreen",
+			"moccasin",
+			"peachpuff",
+			"peru",
+			"sandybrown",
+			"seagreen",
+			"seashell",
+			"sienna",
+			"silver",
+			"skyblue",
+			"slategray",
+			"snow",
+			"steelblue",
+			"tan",
+			"teal",
+			"thistle",
+			"tomato",
+			"turquoise",
+			"wheat",
+			"whitesmoke",
+			"yellowgreen"
+		];
+
+		return $colors[rand(1, count($colors)) - 1];
 	}
 }
 ?>

@@ -69,6 +69,11 @@ Imerologio.printer = function() {
 		Imerologio.ektiposiDOM.css('display', 'none');
 		Imerologio.imerologioDOM.css('margin', '60px 0 0 20px');
 		Imerologio.pinakasDOM.css('box-shadow', 'none');
+
+		if (Imerologio.simeraDOM) {
+			$('.mera').css('position', 'static');
+			Imerologio.simeraDOM.css('display', 'none');
+		}
 	}).
 	on('afterprint', function() {
 		Imerologio.bodyDOM.css('background-color', bodyColor);
@@ -78,6 +83,11 @@ Imerologio.printer = function() {
 		Imerologio.ektiposiDOM.css('display', 'block');
 		Imerologio.imerologioDOM.css('margin', '');
 		Imerologio.pinakasDOM.css('box-shadow', '');
+
+		if (Imerologio.simeraDOM) {
+			$('.mera').css('position', 'relative');
+			Imerologio.simeraDOM.css('display', '');
+		}
 	});
 
 	Imerologio.printDOM.
@@ -149,6 +159,8 @@ Imerologio.dow = [
 ];
 
 Imerologio.display = function() {
+	Imerologio.simeraDOM = undefined;
+
 	if (!Imerologio.etosDOM.length)
 	return Imerologio;
 
@@ -195,6 +207,8 @@ Imerologio.display = function() {
 	for (dow = 0; dow < 7; dow++)
 	$('<td class="dow skiasi">').text(Imerologio.dow[dow]).appendTo(gramiDOM);
 
+	let simera = Imerologio.date2ymd();
+
 	// Ακολουθούν οι εβδομάδες του ζητούμενου μήνα.
 
 	do {
@@ -215,8 +229,14 @@ Imerologio.display = function() {
 			if (dow > 4)
 			klasi += ' skiasi';
 
-			$('<td class="' + klasi + '">').text(date.getDate()).
+			let dom = $('<td class="' + klasi + '">').
+			text(date.getDate()).
 			appendTo(gramiDOM);
+
+			if (Imerologio.date2ymd(date) === simera)
+			Imerologio.simeraDOM = $('<img id="simera">').
+			attr('src', 'simera.png').
+			appendTo(dom);
 
 			// Αυξάνουμε την ημερομηνία κατά μία ημέρα.
 
@@ -228,6 +248,17 @@ Imerologio.display = function() {
 	Imerologio.tonosDOM.trigger('change');
 
 	return Imerologio;
+};
+
+Imerologio.date2ymd = function(date) {
+	if (!date)
+	date = new Date();
+
+	let ymd = date.getFullYear() * 10000;
+	ymd += date.getMonth() * 100;
+	ymd += date.getDate();
+
+	return ymd;
 };
 
 $(Imerologio.init);

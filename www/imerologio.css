@@ -90,6 +90,7 @@ body {
 }
 
 .mera {
+	position: relative;
 	width: 90px;
 	height: 70px;
 	font-family: "Rancho", serif;
@@ -97,6 +98,13 @@ body {
 	font-style: normal;
 	font-size: 48px;
 
+}
+
+#simera {
+	position: absolute;
+	top: 6px;
+	left: 6px;
+	width: 26px;
 }
 
 .skiasi {
