@@ -38,10 +38,16 @@ Imerologio.setup = function() {
 	Imerologio.tonosDOM.on('change', function() {
 		switch ($('input[name=tonos]:checked').val()) {
 		case 'light':
-			$('.mera').css('font-weight', 'normal');
+			$('.mera').css({
+				"font-weight": 'normal',
+				"font-size": '42px',
+			});
 			break;
 		default:
-			$('.mera').css('font-weight', 'bold');
+			$('.mera').css({
+				"font-weight": '',
+				"font-size": '',
+			});
 			break;
 		}
 	});
@@ -63,7 +69,7 @@ Imerologio.printer = function() {
 		Imerologio.copyrightDOM.css('display', '');
 		Imerologio.seletosDOM.css('display', '');
 		Imerologio.selminasDOM.css('display', '');
-		Imerologio.ektiposiDOM.css('display', '');
+		Imerologio.ektiposiDOM.css('display', 'block');
 		Imerologio.imerologioDOM.css('margin', '');
 		Imerologio.pinakasDOM.css('box-shadow', '');
 	});
