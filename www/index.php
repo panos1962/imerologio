@@ -1,48 +1,46 @@
-<?php
-define("ETOS_MIN", 6);
-define("ETOS_MAX", 9994);
-
-define("MINAS_MIN", 1);
-define("MINAS_MAX", 12);
-?>
-
 <!DOCTYPE html>
 <html>
 <head>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Rancho&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="imerologio.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+<link rel="stylesheet" href="imerologio.css">
 <script src="imerologio.js"></script>
+
 <title>Ημερολόγιο</title>
 <link rel="icon" type="image/png" href="favicon.png">
+
 </head>
 
 <body<?php
-if (array_key_exists("color", $_GET))
-print ' style="background-color: ' . Epilogi::random_color() . '"';
-?>>
+// Αν έχει δοθεί παράμετρος "color" στο url, τότε η σελίδα
+// χρωματίζεται με τυχαίο χρώμα από παλέτα ήπιων χρωμάτων.
 
+if (array_key_exists("color", $_GET))
+print ' style="background-color: ' . Imerologio::random_color() . '"';
+?>>
 <?php
-Epilogi::
+
+Imerologio::
 init()::
 copyright()::
 seldeka()::
 seletos()::
 selminas()::
-imerologio();
+pinakas();
+
 ?>
 </body>
-
 </html>
-
 <?php
 
-Class Epilogi {
-	public static $etos;
-	public static $minas;
-	public static $minas_name;
+Class Imerologio {
+	public static $etos;	// default έτος
+	public static $minas;	// default μήνας
+	private static $sanim;	// ονόματα μηνών
 
 	public static function init() {
 		self::
@@ -50,7 +48,111 @@ Class Epilogi {
 		init_minas()::
 		post_init();
 
-		self::$minas_name = [
+		return __CLASS__;
+	}
+
+	// Η function "init_etos" αρχικοποιεί το default έτος του
+	// ημερολογίου.
+
+	private static function init_etos() {
+		// Εκκινούμε θέτοντας ως default έτος το τρέχον έτος και ως
+		// default μήνα τον τρέχοντα μήνα.
+
+		self::$etos = intval(date("Y"));
+		self::$minas = intval(date("m"));
+
+		// Ελέγχουμε αν έχει δοθεί έτος στο url.
+
+		if (!array_key_exists("etos", $_GET))
+		return __CLASS__;
+
+		// Αν έχει δοθεί έτος στο url ακυρώνουμε τον default μήνα,
+		// ακόμη και αν το έτος που δόθηκε είναι λανθασμένο,
+		// ωστόσο αφήνουμε το default έτος στο τρέχον έτος.
+
+		self::$minas = NULL;
+		$etos = $_GET["etos"];
+
+		// Ελέγχουμε το έτος που δόθηκε όσον αφορά τόσο την
+		// συντακτική όσο και την αριθμητική του ορθότητα.
+
+		if (!is_numeric($etos))
+		return __CLASS__;
+
+		if ($etos < 0)
+		return __CLASS__;
+
+		// Αν το έτος που δόθηκε είναι μικρότερο από την ελάχιστη
+		// επιτρεπόμενη τιμή, θέτουμε ως default έτος την ελάχιστη
+		// επιτρεπόμενη τιμή ώστε ο χρήστης λάβει γνώση του κάτω
+		// ορίου.
+
+		if ($etos < 0) {
+			self::$etos = 0;
+			return __CLASS__;
+		}
+
+		// Λειτουργούμε ανάλογα και στην περίπτωση που το έτος που
+		// δόθηκε υπερβαίνει την ανώτερη επιτρπόμενη τιμή.
+
+		if ($etos > 9999) {
+			self::$etos = 9999;
+			return __CLASS__;
+		}
+
+		// Το έτος που δόθηκε είναι δεκτό, οπότε το θέτουμε ως
+		// default έτος.
+
+		self::$etos = $etos;
+		return __CLASS__;
+	}
+
+	// Η function "init_minas" αρχικοποιεί τον default μήνα, αφού
+	// έχει προηγηθεί η αρχικοποίηση του default έτους.
+
+	private static function init_minas() {
+		// Ελέγχουμε αν έχει δοθεί μήνας στο url.
+
+		if (!array_key_exists("minas", $_GET))
+		return __CLASS__;
+
+		// Αν έχει δοθεί μήνας στο url, ακυρώνουμε τον default
+		// μήνα πριν προβούμε στον έλεγχο του δοθέντος μήνα.
+
+		self::$minas = NULL;
+		$minas = $_GET["minas"];
+
+		// Αν υπάρχει οποιοδήποτε σφάλμα στον καθορισμό του
+		// default μήνα, φήνουμε απροσδιόριστο τον default
+		// μήνα.
+
+		if (!is_numeric($minas))
+		return __CLASS__;
+
+		if ($minas < 0)
+		return __CLASS__;
+
+		if ($minas < 1)
+		return __CLASS__;
+
+		if ($minas > 12)
+		return __CLASS__;
+
+		// Ο μήνας που δόθηκε ήταν ορθογραφικά και αριθμητικά
+		// ορθός, οπότε θέτουμε τον default μήνα.
+
+		self::$minas = intval($minas);
+		return __CLASS__;
+	}
+
+	// Η function "post_init" κλείνει το κεφάλαιο της αρχικοποίησης
+	// επιτελώντας κάποιες συμπληρωματικές διεργασίες.
+
+	private static function post_init() {
+		// Δίνουμε τιμές στα ονόματα των μηνών με δείκτες
+		// από 0 μέχρι 11.
+
+		self::$sanim = [
 			"ΙΑΝΟΥΑΡΙΟΣ",
 			"ΦΕΒΡΟΥΑΡΙΟΣ",
 			"ΜΑΡΤΙΟΣ",
@@ -62,71 +164,20 @@ Class Epilogi {
 			"ΣΕΠΤΕΜΒΡΙΟΣ",
 			"ΟΚΤΩΒΡΙΟΣ",
 			"ΝΟΕΜΒΡΙΟΣ",
-			"ΔΕΚΕΜΒΡΙΟΣ",
+			"ΔΕΚΕΜΒΡΙΟΣ"
 		];
 
-		return __CLASS__;
-	}
+		// Εφόσον έχει καθοριστεί default μήνας, τον προσαρμόζουμε
+		// στο εύρος από 0 μέχρι 11.
 
-	private static function init_etos() {
-		self::$etos = intval(date("Y"));
-		self::$minas = intval(date("m"));
-
-		if (!array_key_exists("etos", $_GET))
-		return __CLASS__;
-
-		self::$minas = NULL;
-		$etos = $_GET["etos"];
-
-		if (!is_numeric($etos))
-		return __CLASS__;
-
-		if ($etos < 0)
-		return __CLASS__;
-
-		if ($etos < ETOS_MIN) {
-			self::$etos = ETOS_MIN;
-			return __CLASS__;
-		}
-
-		if ($etos > ETOS_MAX) {
-			self::$etos = ETOS_MAX;
-			return __CLASS__;
-		}
-
-		self::$etos = $etos;
-		return __CLASS__;
-	}
-
-	private static function init_minas() {
-		if (!array_key_exists("minas", $_GET))
-		return __CLASS__;
-
-		self::$minas = NULL;
-		$minas = $_GET["minas"];
-
-		if (!is_numeric($minas))
-		return __CLASS__;
-
-		if ($minas < 0)
-		return __CLASS__;
-
-		if ($minas < MINAS_MIN)
-		return __CLASS__;
-
-		if ($minas > MINAS_MAX)
-		return __CLASS__;
-
-		self::$minas = intval($minas);
-		return __CLASS__;
-	}
-
-	private static function post_init() {
 		if (isset(self::$minas))
 		self::$minas--;
 
 		return __CLASS__;
 	}
+
+	// Η function "copyright" εκτυπώνει μήνυμα copyright στο επάνω
+	// δεξιά μέρος της σελίδας.
 
 	public static function copyright() {
 		?>
@@ -139,6 +190,10 @@ Class Epilogi {
 
 		return __CLASS__;
 	}
+
+	// Η function "seldeka" εκτυπώνει τη στήλη επιλογής δεκαετίας. Στη
+	// στήλη αυτή εκτυπώνοντια δώδεκα δεκαετίες με κεντρική δεκαετία
+	// αυτήν του default έτους.
 
 	public static function seldeka() {
 		?><div id="seldeka" title="Επιλογή δεκαετίας"><?php
@@ -172,11 +227,23 @@ Class Epilogi {
 		return __CLASS__;
 	}
 
+	// Η function "seletos" εκτυπώνει τη στήλη επιλογής έτους. Στη στήλη
+	// αυτή εκτυπώνονται δώδεκα έτη με κεντρικό έτος το default έτος.
+
 	public static function seletos() {
 		?><div id="seletos" title="Επιλογή έτους"><?php
 
 		$etosapo = self::$etos - 6;
+
+		if ($etosapo < 0)
+		$etosapo = 0;
+
 		$etoseos = $etosapo + 12;
+
+		if ($etoseos > 9999)
+		$etoseos = 9999;
+
+		$etosapo = $etoseos - 12;
 
 		for ($etos = $etosapo; $etos < $etoseos; $etos++) {
 			$klasi = "item etos";
@@ -194,6 +261,9 @@ Class Epilogi {
 		return __CLASS__;
 	}
 
+	// Η function "selminas" εκτυπώνει τη στήλη επιλογής μήνα. Στη
+	// στήλη αυτή απλώς εκτυπώνονται τα ονόματα των δώδεκα μηνών.
+
 	public static function selminas() {
 		?><div id="selminas" title="Επιλογή μήνα"><?php
 
@@ -205,7 +275,7 @@ Class Epilogi {
 
 			?><div class="<?php print $klasi; ?>"
 				minas="<?php print $minas; ?>"><?php
-				print self::$minas_name[$minas];
+				print self::$sanim[$minas];
 			?></div><?php
 		}
 
@@ -214,7 +284,11 @@ Class Epilogi {
 		return __CLASS__;
 	}
 
-	public static function imerologio() {
+	// Η function "pinakas" εκτυπώνει την περιοχή στην οποία εμφανίζεται
+	// το μηνιαίο ημερολόγιο με τη μορφή πλέγματος όπου οι κάθετες στήλες
+	// αναφέρονται στις ημέρες τηε εβδομάδας ξεκινώντας από τη Δευτέρα.
+
+	public static function pinakas() {
 		?>
 		<div id="imerologio">
 			<table id="pinakas"></table>
@@ -239,6 +313,10 @@ Class Epilogi {
 
 		return __CLASS__;
 	}
+
+	// Η function "random_color" επιστρέφει ένα τυχαίο χρώμα από την
+	// παλέτα χρωμάτων. Τα χρώματα που έχουν επιλεγεί είναι απαλά
+	// χρώματα που δεν δημιουργούν ανεπιθύμητες αντιθέσεις.
 
 	public static function random_color() {
 		$colors = [

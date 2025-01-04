@@ -103,7 +103,7 @@ Imerologio.dekaEpilogi = function() {
 
 	Imerologio.seldekaDOM.empty();
 
-	let aked = $(this).text();
+	let aked = parseInt($(this).text());
 	let dekaapo = aked - 50;
 
 	while (dekaapo < 0)
@@ -128,8 +128,12 @@ Imerologio.dekaEpilogi = function() {
 
 	let sote = undefined;
 
-	if (Imerologio.etosDOM.length)
-	sote = Imerologio.etosDOM.text();
+	if (Imerologio.etosDOM.length) {
+		sote = parseInt(Imerologio.etosDOM.text());
+
+		if ((sote % 10) == 0)
+		sote = undefined;
+	}
 
 	let etosapo = aked - 1;
 
@@ -147,7 +151,7 @@ Imerologio.dekaEpilogi = function() {
 	for (let etos = etosapo; etos < etoseos; etos++) {
 		let klasi = 'item etos';
 
-		if (etos == sote) {
+		if (etos === sote) {
 			entos = true;
 			klasi += ' epilogi';
 		}
@@ -160,9 +164,23 @@ Imerologio.dekaEpilogi = function() {
 	return Imerologio;
 
 	if (Imerologio.etosDOM.length) {
+		let etosIndex;
+
+		switch (aked) {
+		case 0:
+			etosIndex = 0;
+			break;
+		case 9990:
+			etosIndex = 2;
+			break;
+		default:
+			etosIndex = 1;
+			break;
+		}
+
 		Imerologio.etosDOM.removeClass('epilogi');
 		Imerologio.etosDOM = $(Imerologio.seletosDOM.children().
-			get(aked == 9990 ? 2 : 1));
+			get(etosIndex));
 		Imerologio.etosDOM.addClass('epilogi');
 	}
 
@@ -174,9 +192,7 @@ Imerologio.etosEpilogi = function() {
 	if ($(this).hasClass('epilogi'))
 	return Imerologio;
 
-	if (Imerologio.etosDOM.length)
-	Imerologio.etosDOM.removeClass('epilogi');
-
+	Imerologio.seletosDOM.children('.epilogi').removeClass('epilogi');
 	Imerologio.etosDOM = $(this);
 	Imerologio.etosDOM.addClass('epilogi');
 
@@ -188,9 +204,7 @@ Imerologio.minasEpilogi = function() {
 	if ($(this).hasClass('epilogi'))
 	return Imerologio;
 
-	if (Imerologio.minasDOM.length)
-	Imerologio.minasDOM.removeClass('epilogi');
-
+	Imerologio.selminasDOM.children('.epilogi').removeClass('epilogi');
 	Imerologio.minasDOM = $(this);
 	Imerologio.minasDOM.addClass('epilogi');
 
