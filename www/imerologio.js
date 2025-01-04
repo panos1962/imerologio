@@ -14,6 +14,7 @@ Imerologio.init = function() {
 Imerologio.setup = function() {
 	Imerologio.bodyDOM = $(document.body);
 	Imerologio.copyrightDOM = $('#copyright');
+	Imerologio.seldekaDOM = $('#seldeka');
 	Imerologio.seletosDOM = $('#seletos');
 	Imerologio.selminasDOM = $('#selminas');
 	Imerologio.imerologioDOM = $('#imerologio');
@@ -23,6 +24,7 @@ Imerologio.setup = function() {
 	Imerologio.tonosDOM = $('input[name=tonos]');
 	Imerologio.printDOM = $('#print');
 
+	Imerologio.dekaDOM = Imerologio.seldekaDOM.children('.epilogi').first();
 	Imerologio.etosDOM = Imerologio.seletosDOM.children('.epilogi').first();
 	Imerologio.minasDOM = Imerologio.selminasDOM.children('.epilogi').first();
 
@@ -33,6 +35,7 @@ Imerologio.setup = function() {
 	on('mouseleave', '.item', function() {
 		$(this).removeClass('candy');
 	}).
+	on('click', '.deka', Imerologio.dekaEpilogi).
 	on('click', '.etos', Imerologio.etosEpilogi).
 	on('click', '.minas', Imerologio.minasEpilogi);
 
@@ -64,6 +67,7 @@ Imerologio.printer = function() {
 		bodyColor = Imerologio.bodyDOM.css('background-color');
 		Imerologio.bodyDOM.css('background-color', '#FFF');
 		Imerologio.copyrightDOM.css('display', 'none');
+		Imerologio.seldekaDOM.css('display', 'none');
 		Imerologio.seletosDOM.css('display', 'none');
 		Imerologio.selminasDOM.css('display', 'none');
 		Imerologio.ektiposiDOM.css('display', 'none');
@@ -76,6 +80,7 @@ Imerologio.printer = function() {
 	on('afterprint', function() {
 		Imerologio.bodyDOM.css('background-color', bodyColor);
 		Imerologio.copyrightDOM.css('display', '');
+		Imerologio.seldekaDOM.css('display', '');
 		Imerologio.seletosDOM.css('display', '');
 		Imerologio.selminasDOM.css('display', '');
 		Imerologio.ektiposiDOM.css('display', 'block');
@@ -92,8 +97,80 @@ Imerologio.printer = function() {
 	return Imerologio;
 };
 
+Imerologio.dekaEpilogi = function() {
+	if ($(this).hasClass('epilogi'))
+	return Imerologio;
+
+	Imerologio.seldekaDOM.empty();
+
+	let aked = $(this).text();
+	let dekaapo = aked - 50;
+
+	while (dekaapo < 0)
+	dekaapo += 10;
+
+	let dekaeos = dekaapo + 120;
+
+	while (dekaeos > 10000)
+	dekaeos -= 10;
+
+	dekaapo = dekaeos - 120;
+
+	for (let deka = dekaapo; deka < dekaeos; deka += 10) {
+		let klasi = "item deka";
+
+		if (deka == aked)
+		klasi += ' epilogi';
+
+		$('<div>').addClass(klasi).text(deka).
+		appendTo(Imerologio.seldekaDOM);
+	}
+
+	let sote = undefined;
+
+	if (Imerologio.etosDOM.length)
+	sote = Imerologio.etosDOM.text();
+
+	let etosapo = aked - 6;
+
+	while (etosapo < 0)
+	etosapo++;
+
+	let etoseos = etosapo + 12;
+	let entos = false;
+
+	Imerologio.seletosDOM.empty();
+
+	for (let etos = etosapo; etos < etoseos; etos++) {
+		let klasi = 'item etos';
+
+		if (etos == sote) {
+			entos = true;
+			klasi += ' epilogi';
+		}
+
+		$('<div>').addClass(klasi).text(etos).
+		appendTo(Imerologio.seletosDOM);
+	}
+
+	if (entos)
+	return Imerologio;
+
+	if (Imerologio.etosDOM.length) {
+		Imerologio.etosDOM.removeClass('epilogi');
+		Imerologio.etosDOM = $(Imerologio.seletosDOM.children().get(6));
+		Imerologio.etosDOM.addClass('epilogi');
+	}
+
+	Imerologio.display();
+	return Imerologio;
+};
+
 Imerologio.etosEpilogi = function() {
-	if (Imerologio.etosDOM)
+	if ($(this).hasClass('epilogi'))
+	return Imerologio;
+
+	if (Imerologio.etosDOM.length)
 	Imerologio.etosDOM.removeClass('epilogi');
 
 	Imerologio.etosDOM = $(this);
@@ -104,7 +181,10 @@ Imerologio.etosEpilogi = function() {
 };
 
 Imerologio.minasEpilogi = function() {
-	if (Imerologio.minasDOM)
+	if ($(this).hasClass('epilogi'))
+	return Imerologio;
+
+	if (Imerologio.minasDOM.length)
 	Imerologio.minasDOM.removeClass('epilogi');
 
 	Imerologio.minasDOM = $(this);
@@ -155,8 +235,6 @@ Imerologio.dow = [
 ];
 
 Imerologio.display = function() {
-	Imerologio.simeraDOM = undefined;
-
 	if (!Imerologio.etosDOM.length)
 	return Imerologio;
 
@@ -166,6 +244,9 @@ Imerologio.display = function() {
 	let etos = Imerologio.etosDOM.text();
 	let minas = Imerologio.minasDOM.attr('minas');
 	let date = new Date(etos, minas);
+
+	Imerologio.pinakasDOM.empty();
+	Imerologio.simeraDOM = undefined;
 
 	// Υπολογίζουμε την πρώτη μέρα του μήνα ως νούμερο
 	// από 0 έως 6 ως εξής:
@@ -185,8 +266,6 @@ Imerologio.display = function() {
 
 	if (dow)
 	date = new Date(date.getTime() - (dow * 24 * 60 * 60 * 1000));
-
-	Imerologio.pinakasDOM.empty();
 
 	// Στην πρώτη γραμμή του πίνακα τυπώνουμε τον μήνα και το έτος.
 

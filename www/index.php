@@ -1,6 +1,6 @@
 <?php
-define("ETOS_MIN", 1805);
-define("ETOS_MAX", 9993);
+define("ETOS_MIN", 6);
+define("ETOS_MAX", 9994);
 
 define("MINAS_MIN", 1);
 define("MINAS_MAX", 12);
@@ -28,6 +28,7 @@ print ' style="background-color: ' . Epilogi::random_color() . '"';
 Epilogi::
 init()::
 copyright()::
+seldeka()::
 seletos()::
 selminas()::
 imerologio();
@@ -139,10 +140,42 @@ Class Epilogi {
 		return __CLASS__;
 	}
 
-	public static function seletos() {
-		?><div id="seletos"><?php
+	public static function seldeka() {
+		?><div id="seldeka" title="Επιλογή δεκαετίας"><?php
 
-		$etosapo = self::$etos - 5;
+		$aked = self::$etos - (self::$etos % 10);
+		$dekaapo = $aked - 50;
+
+		while ($dekaapo < 0)
+		$dekaapo += 10;
+
+		$dekaeos = $dekaapo + 120;
+
+		while ($dekaeos > 10000)
+		$dekaeos -= 10;
+
+		$dekaapo = $dekaeos - 120;
+
+		for ($deka = $dekaapo; $deka < $dekaeos; $deka += 10) {
+			$klasi = "item deka";
+
+			if ($deka == $aked)
+			$klasi .= " epilogi";
+
+			?><div class="<?php print $klasi; ?>"><?php
+				print $deka;
+			?></div><?php
+		}
+
+		?></div><?php
+
+		return __CLASS__;
+	}
+
+	public static function seletos() {
+		?><div id="seletos" title="Επιλογή έτους"><?php
+
+		$etosapo = self::$etos - 6;
 		$etoseos = $etosapo + 12;
 
 		for ($etos = $etosapo; $etos < $etoseos; $etos++) {
@@ -162,7 +195,7 @@ Class Epilogi {
 	}
 
 	public static function selminas() {
-		?><div id="selminas"><?php
+		?><div id="selminas" title="Επιλογή μήνα"><?php
 
 		for ($minas = 0; $minas < 12; $minas++) {
 			$klasi = "item minas";

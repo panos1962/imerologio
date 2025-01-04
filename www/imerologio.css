@@ -16,12 +16,11 @@ body {
 	color: grey;
 }
 
-#seletos {
-	display: inline-block;
-}
-
+#seldeka,
+#seletos,
 #selminas {
 	display: inline-block;
+	cursor: pointer;
 }
 
 .item {
@@ -36,12 +35,10 @@ body {
 
 .etos {
 	font-weight: 900;
-	cursor: pointer;
 }
 
 .minas {
 	text-align: center;
-	cursor: pointer;
 }
 
 .epilogi {
