@@ -338,7 +338,9 @@ Imerologio.date2ymd = function(date) {
 	if (!date)
 	date = new Date();
 
-	let ymd = date.getFullYear() * 10000;
+	let ymd = 0;
+
+	ymd += date.getFullYear() * 10000;
 	ymd += date.getMonth() * 100;
 	ymd += date.getDate();
 
