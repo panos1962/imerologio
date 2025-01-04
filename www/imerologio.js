@@ -131,10 +131,13 @@ Imerologio.dekaEpilogi = function() {
 	if (Imerologio.etosDOM.length)
 	sote = Imerologio.etosDOM.text();
 
-	let etosapo = aked - 6;
+	let etosapo = aked - 1;
 
 	while (etosapo < 0)
 	etosapo++;
+
+	if (etosapo > 9988)
+	etosapo = 9988;
 
 	let etoseos = etosapo + 12;
 	let entos = false;
@@ -158,7 +161,8 @@ Imerologio.dekaEpilogi = function() {
 
 	if (Imerologio.etosDOM.length) {
 		Imerologio.etosDOM.removeClass('epilogi');
-		Imerologio.etosDOM = $(Imerologio.seletosDOM.children().get(6));
+		Imerologio.etosDOM = $(Imerologio.seletosDOM.children().
+			get(aked == 9990 ? 2 : 1));
 		Imerologio.etosDOM.addClass('epilogi');
 	}
 
