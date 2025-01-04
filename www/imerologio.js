@@ -106,7 +106,7 @@ Imerologio.dekaEpilogi = function() {
 	let aked = parseInt($(this).text());
 	let dekaapo = aked - 50;
 
-	while (dekaapo < 0)
+	while (dekaapo < 1600)
 	dekaapo += 10;
 
 	let dekaeos = dekaapo + 120;
@@ -126,15 +126,6 @@ Imerologio.dekaEpilogi = function() {
 		appendTo(Imerologio.seldekaDOM);
 	}
 
-	let sote = undefined;
-
-	if (Imerologio.etosDOM.length) {
-		sote = parseInt(Imerologio.etosDOM.text());
-
-		if ((sote % 10) == 0)
-		sote = undefined;
-	}
-
 	let etosapo = aked - 1;
 
 	while (etosapo < 0)
@@ -144,44 +135,18 @@ Imerologio.dekaEpilogi = function() {
 	etosapo = 9988;
 
 	let etoseos = etosapo + 12;
-	let entos = false;
+	let sote = etosapo + 6;
 
 	Imerologio.seletosDOM.empty();
 
 	for (let etos = etosapo; etos < etoseos; etos++) {
 		let klasi = 'item etos';
 
-		if (etos === sote) {
-			entos = true;
-			klasi += ' epilogi';
-		}
+		if (etos === sote)
+		klasi += ' epilogi';
 
 		$('<div>').addClass(klasi).text(etos).
 		appendTo(Imerologio.seletosDOM);
-	}
-
-	if (entos)
-	return Imerologio;
-
-	if (Imerologio.etosDOM.length) {
-		let etosIndex;
-
-		switch (aked) {
-		case 0:
-			etosIndex = 0;
-			break;
-		case 9990:
-			etosIndex = 2;
-			break;
-		default:
-			etosIndex = 1;
-			break;
-		}
-
-		Imerologio.etosDOM.removeClass('epilogi');
-		Imerologio.etosDOM = $(Imerologio.seletosDOM.children().
-			get(etosIndex));
-		Imerologio.etosDOM.addClass('epilogi');
 	}
 
 	Imerologio.display();

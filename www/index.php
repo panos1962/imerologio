@@ -87,8 +87,8 @@ Class Imerologio {
 		// επιτρεπόμενη τιμή ώστε ο χρήστης λάβει γνώση του κάτω
 		// ορίου.
 
-		if ($etos < 0) {
-			self::$etos = 0;
+		if ($etos < 1600) {
+			self::$etos = 1600;
 			return __CLASS__;
 		}
 
@@ -201,7 +201,7 @@ Class Imerologio {
 		$aked = self::$etos - (self::$etos % 10);
 		$dekaapo = $aked - 50;
 
-		while ($dekaapo < 0)
+		while ($dekaapo < 1600)
 		$dekaapo += 10;
 
 		$dekaeos = $dekaapo + 120;
