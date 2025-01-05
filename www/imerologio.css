@@ -94,11 +94,33 @@ body {
 
 .mera {
 	position: relative;
+	font-style: normal;
+}
+
+.meraHandBold {
 	font-family: "Rancho", serif;
 	font-weight: bold;
-	font-style: normal;
 	font-size: 48px;
+}
 
+.meraHandLight {
+	font-family: "Rancho", serif;
+	font-weight: normal;
+	font-size: 42px;
+}
+
+.meraTypoBold {
+	padding-bottom: 4px;
+	font-family: "Oswald", sans-serif;
+	font-weight: bold;
+	font-size: 44px;
+}
+
+.meraTypoLight {
+	padding-bottom: 4px;
+	font-family: "Oswald", sans-serif;
+	font-weight: normal;
+	font-size: 42px;
 }
 
 #simera {

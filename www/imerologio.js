@@ -23,6 +23,7 @@ Imerologio.setup = function() {
 	Imerologio.ektiposiDOM = $('#ektiposi');
 	Imerologio.panelDOM = $('#panel');
 	Imerologio.tonosDOM = $('input[name=tonos]');
+	Imerologio.fontDOM = $('input[name=font]');
 	Imerologio.printDOM = $('#print');
 
 	Imerologio.
@@ -49,22 +50,22 @@ Imerologio.epilogiSetup = function() {
 };
 
 Imerologio.panelSetup = function() {
-	Imerologio.tonosDOM.on('change', function() {
-		switch ($('input[name=tonos]:checked').val()) {
-		case 'light':
-			$('.mera').css({
-				"font-weight": 'normal',
-				"font-size": '42px',
-			});
-			break;
-		default:
-			$('.mera').css({
-				"font-weight": '',
-				"font-size": '',
-			});
-			break;
-		}
-	});
+	Imerologio.fontDOM.on('change', Imerologio.styleChange);
+	Imerologio.tonosDOM.on('change', Imerologio.styleChange);
+
+	return Imerologio;
+};
+
+Imerologio.styleChange = function() {
+	let font = $('input[name=font]:checked').val();
+	let tonos = $('input[name=tonos]:checked').val();
+
+	$('.mera').
+	removeClass('meraTypoBold').
+	removeClass('meraTypoLight').
+	removeClass('meraHandBold').
+	removeClass('meraHandLight').
+	addClass('mera' + font + tonos);
 
 	return Imerologio;
 };
@@ -262,7 +263,7 @@ Imerologio.display = function() {
 
 		for (dow = 0; dow < 7; dow++) {
 			let m = date.getMonth();
-			let klasi = "mera";
+			let klasi = 'mera';
 
 			// Οι ημέρες που ανήκουν στον προηγούμενο ή στον
 			// επόμενο μήνα εμφανίζονται με αχνά νούμερα.
@@ -296,6 +297,7 @@ Imerologio.display = function() {
 
 	Imerologio.ektiposiDOM.css('display', 'inline-block');
 	Imerologio.tonosDOM.trigger('change');
+	Imerologio.fontDOM.trigger('change');
 
 	return Imerologio;
 };

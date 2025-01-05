@@ -4,7 +4,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Rancho&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Rancho&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 <link rel="stylesheet" href="imerologio.css">
@@ -300,9 +300,15 @@ Class Imerologio {
 				graphics» από τις επιλογές εκτύπωσης.
 				</div>
 				<div id="panel">
-				<input type="radio" id="light" value="light" name="tonos">
+
+				<input type="radio" id="typo" value="Typo" name="font">
+				<label for="typo">Typo</label>
+				<input type="radio" id="hand" value="Hand" name="font" checked>
+				<label for="hand">Hand</label>
+
+				<input type="radio" id="light" value="Light" name="tonos">
 				<label for="light">Light</label>
-				<input type="radio" id="bold" value="bold" name="tonos" checked>
+				<input type="radio" id="bold" value="Bold" name="tonos" checked>
 				<label for="bold">Bold</label>
 
 				<input type="button" id="print" value="Print!">
