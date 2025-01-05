@@ -296,8 +296,7 @@ Imerologio.display = function() {
 	} while (date.getMonth() == minas);
 
 	Imerologio.ektiposiDOM.css('display', 'inline-block');
-	Imerologio.tonosDOM.trigger('change');
-	Imerologio.fontDOM.trigger('change');
+	Imerologio.styleChange();
 
 	return Imerologio;
 };

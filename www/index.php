@@ -301,15 +301,15 @@ Class Imerologio {
 				</div>
 				<div id="panel">
 
-				<input type="radio" id="typo" value="Typo" name="font">
+				<input type="radio" id="typo" value="Typo" name="font" checked>
 				<label for="typo">Typo</label>
-				<input type="radio" id="hand" value="Hand" name="font" checked>
+				<input type="radio" id="hand" value="Hand" name="font">
 				<label for="hand">Hand</label>
 
-				<input type="radio" id="light" value="Light" name="tonos">
-				<label for="light">Light</label>
 				<input type="radio" id="bold" value="Bold" name="tonos" checked>
 				<label for="bold">Bold</label>
+				<input type="radio" id="light" value="Light" name="tonos">
+				<label for="light">Light</label>
 
 				<input type="button" id="print" value="Print!">
 				</div>
