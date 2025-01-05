@@ -89,44 +89,56 @@ body {
 .keli {
 	width: 90px;
 	height: 70px;
+}
 
+.meraKeli {
+	position: relative;
+	width: 100%;
+	height: 100%;
 }
 
 .mera {
-	position: relative;
+	position: absolute;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	text-align: center;
 	font-style: normal;
 }
 
-.meraHandBold {
-	font-family: "Rancho", serif;
-	font-weight: bold;
-	font-size: 48px;
-}
-
-.meraHandLight {
-	font-family: "Rancho", serif;
-	font-weight: normal;
-	font-size: 42px;
-}
-
 .meraTypoBold {
-	padding-bottom: 4px;
+	top: 0px;
 	font-family: "Oswald", sans-serif;
 	font-weight: bold;
 	font-size: 44px;
 }
 
 .meraTypoLight {
+	top: 2px;
 	padding-bottom: 4px;
 	font-family: "Oswald", sans-serif;
+	font-weight: normal;
+	font-size: 40px;
+}
+
+.meraHandBold {
+	top: 6px;
+	font-family: "Rancho", serif;
+	font-weight: bold;
+	font-size: 48px;
+}
+
+.meraHandLight {
+	top: 8px;
+	font-family: "Rancho", serif;
 	font-weight: normal;
 	font-size: 42px;
 }
 
 #simera {
 	position: absolute;
-	top: 0px;
-	left: 4px;
+	top: 6px;
+	left: 6px;
 	width: 26px;
 }
 

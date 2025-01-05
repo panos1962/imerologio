@@ -262,32 +262,38 @@ Imerologio.display = function() {
 		gramiDOM = $('<tr>').appendTo(Imerologio.pinakasDOM);
 
 		for (dow = 0; dow < 7; dow++) {
-			let m = date.getMonth();
-			let klasi = 'mera';
-
-			// Οι ημέρες που ανήκουν στον προηγούμενο ή στον
-			// επόμενο μήνα εμφανίζονται με αχνά νούμερα.
-
-			if (m != minas)
-			klasi += ' ektos';
-
-			let dom = $('<div class="' + klasi + '">').
-			text(date.getDate());
-
-			klasi = 'keli';
+			let tdDOM = $('<td>');
 
 			// Τα Σαββατοκύριακα εμφανίζονται σκιασμένα.
 
 			if (dow > 4)
-			klasi += ' skiasi';
+			tdDOM.addClass('skiasi');
 
-			$('<td class="' + klasi + '">').append(dom).
-			appendTo(gramiDOM);
+			let keliDOM = $('<div>').
+			addClass('keli').
+			appendTo(tdDOM);
+
+			let meraKeliDOM = $('<div>').
+			addClass('meraKeli').
+			appendTo(keliDOM);
+
+			// Οι ημέρες που ανήκουν στον προηγούμενο ή στον
+			// επόμενο μήνα εμφανίζονται με αχνά νούμερα.
+
+			if (date.getMonth() != minas)
+			meraKeliDOM.addClass('ektos');
+
+			let meraDOM = $('<div>').
+			addClass('mera').
+			text(date.getDate()).
+			appendTo(meraKeliDOM);
 
 			if (Imerologio.date2ymd(date) === simera)
 			Imerologio.simeraDOM = $('<img id="simera">').
 			attr('src', 'simera.png').
-			appendTo(dom);
+			appendTo(meraKeliDOM);
+
+			gramiDOM.append(tdDOM);
 
 			// Αυξάνουμε την ημερομηνία κατά μία ημέρα.
 
