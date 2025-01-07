@@ -13,7 +13,15 @@ body {
 	right: 4px;
 	text-align: right;
 	font-style: italic;
-	color: grey;
+}
+
+#fonto {
+	font-style: normal;
+}
+
+#fonto::before {
+	content: 'Color:';
+	margin-right: 0.2em;
 }
 
 #seldeka,

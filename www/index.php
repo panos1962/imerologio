@@ -14,24 +14,15 @@
 <link rel="icon" type="image/png" href="favicon.png">
 
 </head>
-
-<body<?php
-// Αν έχει δοθεί παράμετρος "color" στο url, τότε η σελίδα
-// χρωματίζεται με τυχαίο χρώμα από παλέτα ήπιων χρωμάτων.
-
-if (array_key_exists("color", $_GET))
-print ' style="background-color: ' . Imerologio::random_color() . '"';
-?>>
+<?php Imerologio::init(); ?>
+<body style="background-color: <?php print Imerologio::$xroma; ?>">
 <?php
-
 Imerologio::
-init()::
 copyright()::
 seldeka()::
 seletos()::
 selminas()::
 pinakas();
-
 ?>
 </body>
 </html>
@@ -41,12 +32,50 @@ Class Imerologio {
 	public static $etos;	// default έτος
 	public static $minas;	// default μήνας
 	private static $sanim;	// ονόματα μηνών
+	public static $xroma;	// χρώμα σελίδας
 
 	public static function init() {
 		self::
+		init_ante()::
 		init_etos()::
 		init_minas()::
-		post_init();
+		init_post();
+
+		return __CLASS__;
+	}
+
+	// Η function "init_ante" εκκινεί τη διαδικασία θέτοντας
+	// αρχικές τιμές και παραμέτρους;
+
+	private static function init_ante() {
+		srand();
+
+		// Δίνουμε τιμές στα ονόματα των μηνών με δείκτες
+		// από 0 μέχρι 11.
+
+		self::$sanim = [
+			"ΙΑΝΟΥΑΡΙΟΣ",
+			"ΦΕΒΡΟΥΑΡΙΟΣ",
+			"ΜΑΡΤΙΟΣ",
+			"ΑΠΡΙΛΙΟΣ",
+			"ΜΑΪΟΣ",
+			"ΙΟΥΝΙΟΣ",
+			"ΙΟΥΛΙΟΣ",
+			"ΑΥΓΟΥΣΤΟΣ",
+			"ΣΕΠΤΕΜΒΡΙΟΣ",
+			"ΟΚΤΩΒΡΙΟΣ",
+			"ΝΟΕΜΒΡΙΟΣ",
+			"ΔΕΚΕΜΒΡΙΟΣ"
+		];
+
+		// Αν έχει δοθεί παράμετρος "color" στο url, τότε η σελίδα
+		// χρωματίζεται με τυχαίο χρώμα από παλέτα ήπιων χρωμάτων.
+
+		if (array_key_exists("color", $_GET))
+		self::$xroma = self::random_xroma();
+
+		else
+		self::$xroma = self::random_xroma(0);
 
 		return __CLASS__;
 	}
@@ -145,28 +174,10 @@ Class Imerologio {
 		return __CLASS__;
 	}
 
-	// Η function "post_init" κλείνει το κεφάλαιο της αρχικοποίησης
+	// Η function "init_post" κλείνει το κεφάλαιο της αρχικοποίησης
 	// επιτελώντας κάποιες συμπληρωματικές διεργασίες.
 
-	private static function post_init() {
-		// Δίνουμε τιμές στα ονόματα των μηνών με δείκτες
-		// από 0 μέχρι 11.
-
-		self::$sanim = [
-			"ΙΑΝΟΥΑΡΙΟΣ",
-			"ΦΕΒΡΟΥΑΡΙΟΣ",
-			"ΜΑΡΤΙΟΣ",
-			"ΑΠΡΙΛΙΟΣ",
-			"ΜΑΪΟΣ",
-			"ΙΟΥΝΙΟΣ",
-			"ΙΟΥΛΙΟΣ",
-			"ΑΥΓΟΥΣΤΟΣ",
-			"ΣΕΠΤΕΜΒΡΙΟΣ",
-			"ΟΚΤΩΒΡΙΟΣ",
-			"ΝΟΕΜΒΡΙΟΣ",
-			"ΔΕΚΕΜΒΡΙΟΣ"
-		];
-
+	private static function init_post() {
 		// Εφόσον έχει καθοριστεί default μήνας, τον προσαρμόζουμε
 		// στο εύρος από 0 μέχρι 11.
 
@@ -182,9 +193,9 @@ Class Imerologio {
 	public static function copyright() {
 		?>
 		<div id="copyright">
-			Copyright &copy; 2025- by Panos Papadopoulos.
-			<br>
+			Copyright &copy; 2025- by Panos Papadopoulos.<br>
 			All rights reserverd.
+			<div id="fonto"><?php print self::$xroma; ?></div>
 		</div>
 		<?php
 
@@ -324,31 +335,23 @@ Class Imerologio {
 	// παλέτα χρωμάτων. Τα χρώματα που έχουν επιλεγεί είναι απαλά
 	// χρώματα που δεν δημιουργούν ανεπιθύμητες αντιθέσεις.
 
-	public static function random_color() {
-		$colors = [
-			"aliceblue",
+	public static function random_xroma($idx = NULL) {
+		$xroma = [
+			"darkseagreen",
 			"antiquewhite",
-			"aquamarine",
 			"bisque",
 			"burlywood",
 			"cadetblue",
-			"chocolate",
 			"coral",
 			"darkkhaki",
-			"darkorange",
 			"darksalmon",
-			"darkseagreen",
-			"darkslategray",
 			"forestgreen",
 			"ghostwhite",
-			"gold",
 			"goldenrod",
 			"lemonchiffon",
-			"lightblue",
 			"lightcoral",
 			"lightsalmon",
 			"lightseagreen",
-			"lightsteelblue",
 			"linen",
 			"mediumaquamarine",
 			"mediumseagreen",
@@ -358,7 +361,6 @@ Class Imerologio {
 			"sandybrown",
 			"seagreen",
 			"seashell",
-			"sienna",
 			"silver",
 			"skyblue",
 			"slategray",
@@ -366,15 +368,15 @@ Class Imerologio {
 			"steelblue",
 			"tan",
 			"teal",
-			"thistle",
 			"tomato",
-			"turquoise",
 			"wheat",
 			"whitesmoke",
-			"yellowgreen"
 		];
 
-		return $colors[rand(1, count($colors)) - 1];
+		if (!isset($idx))
+		$idx = rand(0, count($xroma) - 1);
+
+		return $xroma[$idx];
 	}
 }
 ?>
