@@ -33,6 +33,8 @@ Class Imerologio {
 	public static $minas;	// default μήνας
 	private static $sanim;	// ονόματα μηνών
 	public static $xroma;	// χρώμα σελίδας
+	private static $font;	// font (typo/hand)
+	private static $tonos;	// τόνος (bold/light)
 
 	public static function init() {
 		self::
@@ -76,6 +78,28 @@ Class Imerologio {
 
 		else
 		self::$xroma = self::random_xroma(0);
+
+		// Η γραμματοσειρά του ημερολογίου μπορεί να είναι είτε
+		// τυπογραφική (typo), είτε χειρόγραφη (hand).
+
+		self::$font = "typo";
+
+		if (array_key_exists("hand", $_GET))
+		self::$font = "hand";
+
+		elseif (array_key_exists("typo", $_GET))
+		self::$font = "typo";
+
+		// Η τόνος των γραμμάτων του ημερολογίου μπορεί να είναι
+		// είτε έντονος (bold), είτε εκλεπτυσμένος (light).
+
+		self::$tonos = "bold";
+
+		if (array_key_exists("light", $_GET))
+		self::$tonos = "light";
+
+		elseif (array_key_exists("bold", $_GET))
+		self::$tonos = "bold";
 
 		return __CLASS__;
 	}
@@ -312,14 +336,26 @@ Class Imerologio {
 				</div>
 				<div id="panel">
 
-				<input type="radio" id="typo" value="Typo" name="font" checked>
+				<input type="radio" id="typo" value="Typo" name="font"<?php
+					if (self::$font === "typo")
+					print " checked";
+				?>>
 				<label for="typo">Typo</label>
-				<input type="radio" id="hand" value="Hand" name="font">
+				<input type="radio" id="hand" value="Hand" name="font"<?php
+					if (self::$font === "hand")
+					print " checked";
+				?>>
 				<label for="hand">Hand</label>
 
-				<input type="radio" id="bold" value="Bold" name="tonos" checked>
+				<input type="radio" id="bold" value="Bold" name="tonos"<?php
+					if (self::$tonos === "bold")
+					print " checked";
+				?>>
 				<label for="bold">Bold</label>
-				<input type="radio" id="light" value="Light" name="tonos">
+				<input type="radio" id="light" value="Light" name="tonos"<?php
+					if (self::$tonos === "light")
+					print " checked";
+				?>>
 				<label for="light">Light</label>
 
 				<input type="button" id="print" value="Print!">
