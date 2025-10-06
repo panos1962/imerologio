@@ -13,8 +13,9 @@
 
 ## Καθορισμός έτους και μήνα ##
 
-Το πρόγραμμα εντάχθηκε στο domain opasopa.net ως subdomain imerologio.opasopa.net
+Το πρόγραμμα πρόκειται να ενταχθεί στο domain opasopa.gr ως subdomain imerologio.opasopa.gr
 και δέχεται ως παραμέτρους το έτος, π.χ. etos=1992, και τον μήνα, π.χ. minas=2.
+Εναλλακτικά μπορούμε να δώσουμε το link http://opasopa.gr/imerologio.
 
 ## Χρωματισμός ##
 
@@ -22,11 +23,11 @@
 Επίσης, αν θέλουμε τυχαίο χρωματισμό της σελίδας μπορούμε να δώσουμε την παράμετρο color.
 Έτσι, η παρακάτω διεύθυνση θα εμφανίσει το ημερολόγιο του Φεβρουαρίου 1992 με τυχαίο χρωματισμό της σελίδας:
 
-[imerologio.opasopa.net?etos=1992&minas=2&color](imerologio.opasopa.net?etos=1992&minas=2&color)
+[imerologio.opasopa.gr?etos=1992&minas=2&color](imerologio.opasopa.gr?etos=1992&minas=2&color)
 
 ενώ η διεύθυνση:
 
-[imerologio.opasopa.net](imerologio.opasopa.net)
+[imerologio.opasopa.gr](imerologio.opasopa.gr)
 
 θα εμφανίσει το μηνιαίο ημερολόγιο του τρέχοντα μήνα.
 
@@ -37,7 +38,7 @@
 ή εκλεπτυσμένος (light). By default το πρόγραμμα χρησιμοποιεί έντονη τυπογραφική γραμματοσειρά, ενώ
 η διεύθυνση:
 
-[imerologio.opasopa.net?hand&light](imerologio.opasopa.net?hand&light)
+[imerologio.opasopa.gr?hand&light](imerologio.opasopa.gr?hand&light)
 
 θα εμφανίσει το μηνιαίο ημερολόγιο με εκλεπτυσμένη χειρόγραφη γραμματοσειρά.
 
