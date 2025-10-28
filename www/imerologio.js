@@ -213,7 +213,14 @@ Imerologio.display = function() {
 
 	let etos = parseInt(Imerologio.etosDOM.text());
 	let minas = parseInt(Imerologio.minasDOM.attr('minas'));
-	let date = new Date(etos, minas);
+
+	// Παίρνουμε την ημερομηνία με βάση το ζητούμενο έτος και τον
+	// ζητούμενο μήνα. Ωστόσο, πρέπει να βάλουμε ώρα 12, καθώς αν
+	// δεν καθορίσουμε ώρα, η ώρα τίθεται 0 και έτσι σε περίπτωση
+	// αλλαγής ώρας (θερινή/χειμερινή) θα εμφανίσουμε λανθασμένη
+	// ημερομηνία.
+
+	let date = new Date(etos, minas, 1, 12);
 
 	Imerologio.pinakasDOM.empty();
 	Imerologio.simeraDOM = undefined;
